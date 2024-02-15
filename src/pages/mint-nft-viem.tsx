@@ -3,9 +3,9 @@ import { useContractWrite, useAccount } from "wagmi";
 import { abi } from "./abi";
 
 /**
- * Wagmi component for Mint NFT
+ * Component for Mint NFT with viem & wagmi
  */
-export default function MintNFTWagmi() {
+export default function MintNFTWithViem() {
     const { address } = useAccount();
 
     const { data, isLoading, isSuccess, write, status } = useContractWrite({
@@ -20,11 +20,10 @@ export default function MintNFTWagmi() {
     return (
         <>
             <span onClick={() => write()} className={styles.button}>
-                Mint NFT
+                {isLoading ? "Minting..." : "Mint NFT"}
             </span>{" "}
-            {isLoading && <div>Pending...</div>}
+            {status != "idle" && <div>Status: {status}</div>}
             {isSuccess && <div>Transaction: {JSON.stringify(data)}</div>}
-            {<div>Status: {status}</div>}
         </>
     );
 }

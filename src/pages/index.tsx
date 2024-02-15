@@ -2,7 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
 import { useState } from "react";
-import MintNFTWagmi from "./mint-nft-wagmi";
+import MintNFTWithViem from "./mint-nft-viem";
+import MintNFTWithEthers from "./mint-nft-ethers";
 
 export default function Home() {
     const [isNetworkSwitchHighlighted, setIsNetworkSwitchHighlighted] =
@@ -111,7 +112,20 @@ export default function Home() {
                                     to change networks.
                                 </li>
                                 <li>
-                                    Click <MintNFTWagmi />
+                                    Let&apos;s Mint NFT:
+                                    <ul
+                                        style={{
+                                            marginLeft: 30,
+                                            marginTop: 8,
+                                        }}
+                                    >
+                                        <li>
+                                            viem: <MintNFTWithViem />
+                                        </li>
+                                        <li>
+                                            ethers: <MintNFTWithEthers />
+                                        </li>
+                                    </ul>
                                 </li>
                             </ol>
                         </div>
