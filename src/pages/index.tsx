@@ -2,8 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
 import { useState } from "react";
-import { useContractWrite, useAccount } from "wagmi";
-import { abi } from "./abi";
+import MintNFTWagmi from "./mint-nft-wagmi";
 
 export default function Home() {
     const [isNetworkSwitchHighlighted, setIsNetworkSwitchHighlighted] =
@@ -14,17 +13,6 @@ export default function Home() {
         setIsNetworkSwitchHighlighted(false);
         setIsConnectHighlighted(false);
     };
-
-    const { address } = useAccount();
-
-    const { data, isLoading, isSuccess, write, status } = useContractWrite({
-        address: "0x4A9b36506F9971595AAEF488ebaB164f8afA8dD4",
-        abi: abi,
-        functionName: "mint",
-        args: [
-            address ? address : "0x4A9b36506F9971595AAEF488ebaB164f8afA8dD4",
-        ],
-    });
 
     return (
         <>
@@ -123,20 +111,7 @@ export default function Home() {
                                     to change networks.
                                 </li>
                                 <li>
-                                    Click{" "}
-                                    <span
-                                        onClick={() => write()}
-                                        className={styles.button}
-                                    >
-                                        Mint NFT
-                                    </span>{" "}
-                                    {isLoading && <div>Pending...</div>}
-                                    {isSuccess && (
-                                        <div>
-                                            Transaction: {JSON.stringify(data)}
-                                        </div>
-                                    )}
-                                    {<div>Status: {status}</div>}
+                                    Click <MintNFTWagmi />
                                 </li>
                             </ol>
                         </div>
